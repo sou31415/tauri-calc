@@ -5,5 +5,5 @@ TauriとYewを使った電卓です
 2023/08/06/ 21:46:11 追記 動きました
 
 こちら側の環境の関係でMac版以外のバイナリが生成できないので
-Web上で動くWebAssembly版を用意しました
-使いたい方は [こちら](https://sou31415.github.io/calc/index.html)
+
+Web上で動く [WebAssembly版](https://sou31415.github.io/calc/index.html) を用意しました
