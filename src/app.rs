@@ -1,12 +1,19 @@
 use yew::prelude::*;
 
+pub enum Assign {
+    Add,
+    Sub,
+    Mul,
+    Div,
+    Mod,
+}
 #[allow(unused_assignments)]
 #[allow(non_snake_case)]
 #[function_component(App)]
 pub fn app() -> Html {
     let counter = use_state(|| 0isize);
     let a = use_state(|| 0isize);
-    let mode = use_state(|| 0isize);
+    let mode = use_state(|| Assign::Add);
     let AppendButton1 = {
         let counter = counter.clone();
         move |_: MouseEvent| {
@@ -82,7 +89,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(0);
+            mode.set(Assign::Add);
             a.set(*counter.clone());
             let value = 0isize;
             counter.set(value);
@@ -94,7 +101,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(1);
+            mode.set(Assign::Sub);
             a.set(*counter.clone());
             let value = 0isize;
             counter.set(value);
@@ -106,7 +113,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(2);
+            mode.set(Assign::Mul);
             a.set(*counter.clone());
             let value = 0isize;
             counter.set(value);
@@ -117,7 +124,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(3);
+            mode.set(Assign::Div);
             a.set(*counter.clone());
             let value = 0isize;
             counter.set(value);
@@ -128,7 +135,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(4);
+            mode.set(Assign::Mod);
             a.set(*counter.clone());
             let value = 0isize;
             counter.set(value);
@@ -139,28 +146,34 @@ pub fn app() -> Html {
         let a = a.clone();
         let mode = mode.clone();
         move |_: MouseEvent| {
-            if *mode == 0 {
-                let value = *a + *counter;
-                counter.set(value);
-                a.set(0);
-            } else if *mode == 1 {
-                let value = *a - *counter;
-                counter.set(value);
-                a.set(0);
-            } else if *mode == 2 {
-                let value = *a * *counter;
-                counter.set(value);
-                a.set(0);
-            } else if *mode == 3 {
-                let value = *a / *counter;
-                counter.set(value);
-                a.set(0);
-            } else {
-                let value = *a % *counter;
-                counter.set(value);
-                a.set(0);
-            }
-            mode.set(0);
+            match *mode {
+                Assign::Add => {
+                    let value = *a + *counter;
+                    counter.set(value);
+                    a.set(0);
+                }
+                Assign::Sub => {
+                    let value = *a - *counter;
+                    counter.set(value);
+                    a.set(0);
+                }
+                Assign::Mul => {
+                    let value = *a * *counter;
+                    counter.set(value);
+                    a.set(0);
+                }
+                Assign::Div => {
+                    let value = *a / *counter;
+                    counter.set(value);
+                    a.set(0);
+                }
+                Assign::Mod => {
+                    let value = *a % *counter;
+                    counter.set(value);
+                    a.set(0);
+                }
+            };
+            mode.set(Assign::Add);
         }
     };
 
@@ -169,7 +182,7 @@ pub fn app() -> Html {
         let mode = mode.clone();
         let a = a.clone();
         move |_: MouseEvent| {
-            mode.set(0);
+            mode.set(Assign::Add);
             a.set(0);
             let value = 0isize;
             counter.set(value);
